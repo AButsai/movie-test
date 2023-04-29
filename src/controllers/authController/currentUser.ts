@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import { ErrorNotFound } from '../../errors/ErrorProcessing.js'
-import { getTokenByOwner } from '../../servers/tokenService/index.js'
-import { getUserByEmail } from '../../servers/userService/index.js'
+import { getTokenByOwner } from '../../service/tokenService/index.js'
+import { getUserByEmail } from '../../service/userService/index.js'
 
 export const currentUser = async (req: Request, res: Response) => {
   const { email } = req.user
