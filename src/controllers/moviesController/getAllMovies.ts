@@ -12,7 +12,7 @@ export const getAllMovies = async (req: Request, res: Response) => {
 
   if (isNaN(page) || page === undefined || isNaN(limit) || limit === undefined) {
     page = 0
-    limit = 5
+    limit = 20
   }
 
   const skip = page * limit

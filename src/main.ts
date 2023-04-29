@@ -7,7 +7,7 @@ import authRouter from './routes/api/authRouter.js'
 import movieRouter from './routes/api/moviesRouter.js'
 
 import { RequestError } from './errors/ErrorProcessing.js'
-import { limiter } from './middleware/rateLimit.js'
+import { limiter } from './helpers/rateLimit.js'
 import { TError } from './types.js'
 
 dotenv.config()
