@@ -8,7 +8,6 @@ export const register = async (req: Request, res: Response) => {
   const { username, email, password } = req.body
   const candidate = await getUserByEmail(email.toLowerCase().trim())
   if (candidate) {
-    console.log('candidate', candidate)
     throw new ErrorEmailExist()
   }
 
@@ -17,7 +16,7 @@ export const register = async (req: Request, res: Response) => {
   const user = await addNewUser({ username, email: email.toLowerCase().trim(), password: hasPassword })
 
   const tokens = await generateTokens(user.email, user._id)
-  await addToken({ accessToken: tokens.accessToken, id: user._id })
+  await addToken({ accessToken: tokens.accessToken, owner: user._id })
 
   res.status(200).json({ message: 'Success', accessToken: `Bearer ${tokens.accessToken}` })
 }

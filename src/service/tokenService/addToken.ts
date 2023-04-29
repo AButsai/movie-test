@@ -1,11 +1,15 @@
-import { Token } from '../../model/tokenSchema.js'
+import { ErrorDataBase } from '../../errors/ErrorProcessing.js'
+import { Token } from '../../model/index.js'
 
-interface IToken {
+interface ITokenBody {
   accessToken: string
-  id: string
+  owner: string
 }
 
-export const addToken = async (body: IToken) => {
-  const { accessToken, id } = body
-  return await Token.create({ accessToken, owner: id })
+export const addToken = async (body: ITokenBody) => {
+  try {
+    return await Token.create({ ...body })
+  } catch (error) {
+    throw new ErrorDataBase(error)
+  }
 }

@@ -1,0 +1,5 @@
+export { addMovie } from './addMovie.js'
+export { deleteMovieById } from './deleteMovieById.js'
+export { getAllMovies } from './getAllMovies.js'
+export { getMovieById } from './getMovieById.js'
+export { updateMovieById } from './updateMovieById.js'

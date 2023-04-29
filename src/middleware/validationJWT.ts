@@ -2,19 +2,19 @@ import { NextFunction, Request, Response } from 'express'
 import jwt, { JwtPayload } from 'jsonwebtoken'
 
 import { ErrorTokenTypeInvalid, ErrorUnauthorized, factoryErrorJWT } from '../errors/ErrorProcessing.js'
-import { getUserByEmail } from '../servers/userService/getUserByEmail.js'
-
-type TFuncToken = (req: Request, res: Response, next: NextFunction) => Promise<void>
-type TDecodedToken = (token: string, secret: string, next: NextFunction) => Promise<any>
+import { getTokenByOwner } from '../service/tokenService/index.js'
+import { getUserByEmail } from '../service/userService/index.js'
 
 const { ACCESS_TOKEN_PRIVATE_KEY } = process.env
 
-const decodedToken: TDecodedToken = async (token, secret, next) => {
+const decodedToken = async (token: string, secret: string, next: NextFunction) => {
   try {
     const decoded: JwtPayload = jwt.verify(token, secret) as JwtPayload
     const user = await getUserByEmail(decoded.email)
-    if (!user) {
+    const accessToken = await getTokenByOwner(user?._id)
+    if (!user || token !== accessToken) {
       next(new ErrorUnauthorized())
+      return
     }
     return user
   } catch (error) {
@@ -22,7 +22,7 @@ const decodedToken: TDecodedToken = async (token, secret, next) => {
   }
 }
 
-export const validationSuccessToken: TFuncToken = async (req, res, next) => {
+export const validationSuccessToken = async (req: Request, res: Response, next: NextFunction) => {
   if (req.headers.authorization === undefined || req.headers.authorization === null) {
     next(new ErrorUnauthorized())
     return

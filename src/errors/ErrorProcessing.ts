@@ -14,12 +14,6 @@ export class ErrorBadRequest extends RequestError {
   }
 }
 
-export class ErrorVerificationCodePassed extends ErrorBadRequest {
-  constructor() {
-    super('Verification has already been passed')
-  }
-}
-
 export class ErrorEmailNotValid extends ErrorBadRequest {
   constructor() {
     super('Email not valid')
@@ -47,12 +41,6 @@ export class ErrorLogin extends ErrorUnauthorized {
 export class ErrorTokenTypeInvalid extends ErrorUnauthorized {
   constructor(public typeToken: string) {
     super(`Token type is not valid ${typeToken}`)
-  }
-}
-
-export class ErrorEmailNotVerified extends ErrorUnauthorized {
-  constructor() {
-    super('Email is not verify')
   }
 }
 
@@ -89,5 +77,11 @@ export class ErrorConflict extends RequestError {
 export class ErrorEmailExist extends ErrorConflict {
   constructor() {
     super('User with this email already exists!')
+  }
+}
+
+export class ErrorDataBase extends RequestError {
+  constructor(public error: any) {
+    super(500, `Error database:: ${error}`)
   }
 }

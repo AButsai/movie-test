@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import { ErrorUnauthorized } from '../../errors/ErrorProcessing.js'
-import { getUserByEmail } from '../../service/userService/index.js'
 import { updateToken } from '../../service/tokenService/index.js'
+import { getUserByEmail } from '../../service/userService/index.js'
 
 export const logout = async (req: Request, res: Response) => {
   const { email } = req.user
