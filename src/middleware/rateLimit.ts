@@ -1,6 +1,5 @@
-import dotenv from 'dotenv'
 import rateLimit from 'express-rate-limit'
-dotenv.config()
+
 const { REQUEST_LIMIT, WINDOW_MS } = process.env
 
 export const limiter = rateLimit({
