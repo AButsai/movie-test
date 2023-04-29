@@ -35,7 +35,7 @@ app.use((err: TError, req: Request, res: Response, next: NextFunction) => {
   res.status(500).json({ message: 'Server error' })
 })
 
-const connection = mongoose.connect(DB_HOST as string, {})
+const connection = mongoose.connect(DB_HOST as string)
 
 connection
   .then(() => {
