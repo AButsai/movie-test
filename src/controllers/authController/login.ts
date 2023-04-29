@@ -7,7 +7,7 @@ import { getUserByEmail } from '../../service/userService/index.js'
 export const login = async (req: Request, res: Response) => {
   const { email, password } = req.body
 
-  const candidate = await getUserByEmail(email.toLowerCase().trim())
+  const candidate = await getUserByEmail(email.toLowerCase().trim(), false)
   if (!candidate || !comparePassword(password, candidate?.password)) {
     throw new ErrorLogin()
   }

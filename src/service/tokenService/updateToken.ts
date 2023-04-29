@@ -1,5 +1,10 @@
+import { ErrorDataBase } from '../../errors/ErrorProcessing.js'
 import { Token } from '../../model/index.js'
 
 export const updateToken = async (owner: string, accessToken: string | null) => {
-  await Token.updateOne({ owner }, { accessToken })
+  try {
+    await Token.updateOne({ owner }, { accessToken })
+  } catch (error) {
+    throw new ErrorDataBase(error)
+  }
 }
