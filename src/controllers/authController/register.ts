@@ -1,8 +1,8 @@
 import { Request, Response } from 'express'
 import { ErrorEmailExist } from '../../errors/ErrorProcessing.js'
 import { createHashPassport, generateTokens } from '../../helpers/index.js'
-import { addToken } from '../../servers/tokenService/index.js'
-import { addNewUser, getUserByEmail } from '../../servers/userService/index.js'
+import { addToken } from '../../service/tokenService/index.js'
+import { addNewUser, getUserByEmail } from '../../service/userService/index.js'
 
 export const register = async (req: Request, res: Response) => {
   const { username, email, password } = req.body

@@ -1,8 +1,8 @@
 import { Request, Response } from 'express'
 import { ErrorLogin } from '../../errors/ErrorProcessing.js'
 import { comparePassword, generateTokens } from '../../helpers/index.js'
-import { updateToken } from '../../servers/tokenService/index.js'
-import { getUserByEmail } from '../../servers/userService/index.js'
+import { updateToken } from '../../service/tokenService/index.js'
+import { getUserByEmail } from '../../service/userService/index.js'
 
 export const login = async (req: Request, res: Response) => {
   const { email, password } = req.body
