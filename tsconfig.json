@@ -1,12 +1,10 @@
 {
   "compilerOptions": {
-    "target": "es6",
+    "target": "ES2018",
     "lib": ["ES6"],
     "module": "NodeNext",
-    "moduleResolution": "node",
     "rootDir": "./src",
     "typeRoots": ["src/@types", "./node_modules/@types"],
-    "types": ["node", "express"],
     "resolveJsonModule": true,
     "allowJs": true,
     "sourceMap": true,
@@ -16,15 +14,11 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitAny": true,
-    "skipLibCheck": true,
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./src/*"]
-    }
+    "skipLibCheck": true
   },
   "include": ["src/**/*"],
   "exclude": ["node_module"],
-  "lib": ["ES6"],
+  "lib": ["esnext"],
   "ts-node": {
     "esm": true
   }

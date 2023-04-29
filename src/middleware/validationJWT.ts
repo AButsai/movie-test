@@ -1,18 +1,18 @@
 import { NextFunction, Request, Response } from 'express'
-import jwt from 'jsonwebtoken'
+import jwt, { JwtPayload } from 'jsonwebtoken'
 
 import { ErrorTokenTypeInvalid, ErrorUnauthorized, factoryErrorJWT } from '../errors/ErrorProcessing.js'
-// import { getUser } from '../servers/userService.js'
+import { getUserByEmail } from '../servers/userService/getUserByEmail.js'
 
 type TFuncToken = (req: Request, res: Response, next: NextFunction) => Promise<void>
-type TDecodedToken = (token: string, secret: string, next: NextFunction) => Promise<TUser>
+type TDecodedToken = (token: string, secret: string, next: NextFunction) => Promise<any>
 
 const { ACCESS_TOKEN_PRIVATE_KEY } = process.env
 
 const decodedToken: TDecodedToken = async (token, secret, next) => {
   try {
-    const decoded = jwt.verify(token, secret)
-    const user = await getUser(decoded.email)
+    const decoded: JwtPayload = jwt.verify(token, secret) as JwtPayload
+    const user = await getUserByEmail(decoded.email)
     if (!user) {
       next(new ErrorUnauthorized())
     }

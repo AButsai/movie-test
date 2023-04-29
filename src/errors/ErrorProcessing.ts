@@ -32,12 +32,6 @@ export class ErrorValidSchemaJoi extends ErrorBadRequest {
   }
 }
 
-export class ErrorEmailSend extends ErrorBadRequest {
-  constructor(public message = 'Error email send') {
-    super(message)
-  }
-}
-
 export class ErrorUnauthorized extends RequestError {
   constructor(public message = 'Not authorized') {
     super(401, `Unauthorized error:: ${message}`)
@@ -59,24 +53,6 @@ export class ErrorTokenTypeInvalid extends ErrorUnauthorized {
 export class ErrorEmailNotVerified extends ErrorUnauthorized {
   constructor() {
     super('Email is not verify')
-  }
-}
-
-export class ErrorConfirmPassword extends ErrorUnauthorized {
-  constructor() {
-    super("Passwords don't match")
-  }
-}
-
-export class ErrorConfirmCode extends ErrorUnauthorized {
-  constructor() {
-    super("Verification code don't match")
-  }
-}
-
-export class ErrorVerificationCode extends ErrorUnauthorized {
-  constructor() {
-    super('Verification code is not valid')
   }
 }
 
