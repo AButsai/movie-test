@@ -8,14 +8,14 @@ const movieRouter = express.Router()
 
 movieRouter.use(validationSuccessToken)
 
-movieRouter.post('/add-movie', validationBody(joiSchemaAddMovie), controllerWrapper(addMovie))
+movieRouter.post('/movies', validationBody(joiSchemaAddMovie), controllerWrapper(addMovie))
 
-movieRouter.get('/all-movies', controllerWrapper(getAllMovies))
+movieRouter.get('/movies', controllerWrapper(getAllMovies))
 
-movieRouter.get('/get-movie/:movieId', controllerWrapper(getMovie))
+movieRouter.get('/movies/:movieId', controllerWrapper(getMovie))
 
-movieRouter.patch('/update-movie/:movieId', validationBody(joiSchemaAddMovie), controllerWrapper(updateMovie))
+movieRouter.patch('/movies/:movieId', validationBody(joiSchemaAddMovie), controllerWrapper(updateMovie))
 
-movieRouter.delete('/delete-movie/:movieId', controllerWrapper(deleteMovie))
+movieRouter.delete('/movies/:movieId', controllerWrapper(deleteMovie))
 
 export default movieRouter
