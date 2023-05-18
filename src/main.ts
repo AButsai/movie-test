@@ -25,8 +25,7 @@ app.use((req: Request, res: Response) => {
   res.status(404).json({ message: 'Not found' })
 })
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-app.use((err: TError, req: Request, res: Response, next: NextFunction) => {
+app.use((err: TError, _req: Request, res: Response, _next: NextFunction) => {
   if (err instanceof RequestError) {
     const { status, message } = err
     return res.status(status).json({ message })

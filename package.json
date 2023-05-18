@@ -47,6 +47,7 @@
     "express-rate-limit": "^6.7.0",
     "joi": "^17.7.1",
     "jsonwebtoken": "^9.0.0",
+    "moment": "^2.29.4",
     "mongoose": "^7.1.0",
     "mustache": "^4.2.0",
     "node-pg-migrate": "^6.2.2",

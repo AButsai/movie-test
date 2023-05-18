@@ -1,4 +1,5 @@
 import { Document, Schema, Types, model } from 'mongoose'
+import moment from 'moment'
 
 interface IMovie extends Document {
   title: string
@@ -20,6 +21,15 @@ const movie = new Schema<IMovie>(
     releaseDate: {
       type: String,
       required: true,
+      validate: {
+        validator: (value: string) => {
+          const currentDate = moment()
+          const releaseDate = moment(value, 'DD-MM-YYYY', true)
+
+          return releaseDate.isValid() && releaseDate.isSameOrBefore(currentDate)
+        },
+        message: 'Release date cannot be in the future',
+      },
     },
     owner: {
       type: Schema.Types.ObjectId,

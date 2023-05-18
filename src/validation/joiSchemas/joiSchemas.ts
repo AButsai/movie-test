@@ -1,4 +1,5 @@
 import Joi from 'joi'
+import moment from 'moment'
 import { IAddMovie, IUserLogin, IUserReg } from './interfaces.js'
 
 export const joiSchemaRegister = (data: IUserReg) => {
@@ -28,16 +29,10 @@ export const joiSchemaAddMovie = (data: IAddMovie) => {
       .pattern(/^\d{2}-\d{2}-\d{4}$/)
       .required()
       .custom((value, helpers) => {
-        const currentDate = new Date().getTime()
+        const currentDate = moment()
+        const releaseDate = moment(value, 'DD-MM-YYYY', true)
 
-        const dataPars = value.split('-')
-        const day = parseInt(dataPars[0], 10)
-        const month = parseInt(dataPars[1], 10) - 1
-        const year = parseInt(dataPars[2], 10)
-
-        const selectedDate = new Date(year, month, day).getTime()
-
-        if (selectedDate > currentDate) {
+        if (releaseDate.isValid() && !releaseDate.isSameOrBefore(currentDate)) {
           return helpers.error('any.invalid')
         }
 
