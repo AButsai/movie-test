@@ -30,7 +30,6 @@ app.use((err: TError, _req: Request, res: Response, _next: NextFunction) => {
     const { status, message } = err
     return res.status(status).json({ message })
   }
-  console.log('err', err)
   res.status(500).json({ message: 'Server error' })
 })
 
