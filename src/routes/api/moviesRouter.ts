@@ -9,9 +9,9 @@ const movieRouter = express.Router()
 
 movieRouter.use(validationSuccessToken)
 
-movieRouter.post('', validationBody<IAddMovie>(joiSchemaAddMovie), controllerWrapper(addMovie))
+movieRouter.post('/', validationBody<IAddMovie>(joiSchemaAddMovie), controllerWrapper(addMovie))
 
-movieRouter.get('', controllerWrapper(getAllMovies))
+movieRouter.get('/', controllerWrapper(getAllMovies))
 
 movieRouter.get('/:movieId', controllerWrapper(getMovie))
 
